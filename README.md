@@ -10,7 +10,7 @@
 + 注册app到系统分享面板，能够处理分享自外部的URL、图片、文档。
 
 ## 截图
-![image](https://github.com/stridercheng/chatui/raw/master/images/preview.png)
+![image](../images/preview.png)
 
 ## 问题
 代码结构待优化
