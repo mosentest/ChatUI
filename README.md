@@ -13,7 +13,7 @@ https://github.com/Rance935/ChatUI
 + 注册app到系统分享面板，能够处理分享自外部的URL、图片、文档。
 
 ## 截图
-![image](https://github.com/moz1q1/ChatUI/images/preview.png)
+![image](https://github.com/moz1q1/ChatUI/raw/master/images/preview.png)
 
 ## 问题
 代码结构待优化
