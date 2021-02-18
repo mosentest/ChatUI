@@ -1,4 +1,7 @@
-修改自开源项目：https://github.com/Rance935/ChatUI 
+修改自开源项目：
+
+https://github.com/stridercheng/chatui
+https://github.com/Rance935/ChatUI
 
 ## 修改内容
 + 替换部分图片资源
@@ -10,7 +13,7 @@
 + 注册app到系统分享面板，能够处理分享自外部的URL、图片、文档。
 
 ## 截图
-![image](../master/images/preview.png)
+![image](https://github.com/moz1q1/ChatUI/images/preview.png)
 
 ## 问题
 代码结构待优化
