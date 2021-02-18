@@ -16,5 +16,9 @@ https://github.com/Rance935/ChatUI
 ## 截图
 ![image](https://github.com/moz1q1/ChatUI/blob/master/images/preview.png)
 
+
+<img src="https://github.com/moz1q1/ChatUI/blob/master/images/preview.png" width="200" height="200" alt="微信小程序"/><br/>
+
+
 ## 问题
 代码结构待优化
