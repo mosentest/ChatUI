@@ -4,6 +4,10 @@ https://github.com/stridercheng/chatui
 
 https://github.com/Rance935/ChatUI
 
+## 修改内容 2021-2-19
++ 适配10.0问题
++ 改为用studio3.5运行配置
+
 ## 修改内容
 + 替换部分图片资源
 + 用源生RecyclerView替换了EasyRecyclerView,比较相信官方。
