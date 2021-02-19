@@ -1,9 +1,16 @@
 package com.rance.chatui.util;
 
+import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
+import android.net.Uri;
+import android.os.Build;
+
+import androidx.core.content.FileProvider;
+
+import java.io.File;
 
 /**
  * 作者：Rance on 2016/12/15 15:11
@@ -42,7 +49,7 @@ public class MediaManager {
             mMediaPlayer.prepare();
             mMediaPlayer.start();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 

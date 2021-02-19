@@ -140,6 +140,12 @@ public class ChatSendViewHolder extends BaseViewHolder<MessageInfo> {
 
                 chatItemContentImage.setVisibility(View.VISIBLE);
                 Glide.with(mContext).load(data.getFilepath()).into(chatItemContentImage);
+                chatItemContentImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onItemClickListener.onImageClick(chatItemContentImage, (Integer) itemView.getTag());
+                    }
+                });
                 layoutParams.width = Utils.dp2px(mContext, 120);
                 layoutParams.height = Utils.dp2px(mContext, 48);
                 chatItemLayoutContent.setLayoutParams(layoutParams);
@@ -158,6 +164,12 @@ public class ChatSendViewHolder extends BaseViewHolder<MessageInfo> {
                 layoutParams.width = Utils.dp2px(mContext, 120);
                 layoutParams.height = Utils.dp2px(mContext, 48);
                 chatItemLayoutContent.setLayoutParams(layoutParams);
+                chatItemLayoutContent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onItemClickListener.onVoiceClick(chatItemVoice, (Integer) itemView.getTag());
+                    }
+                });
                 break;
             case Constants.CHAT_FILE_TYPE_FILE:
                 chatItemVoice.setVisibility(View.GONE);

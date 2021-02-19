@@ -8,6 +8,7 @@ public class MessageInfo {
     private int type;
     private String content;
     private String filepath;
+    private String fileUri;//适配10.0问题的
     private int sendState;
     private String time;
     private String header;
@@ -55,6 +56,14 @@ public class MessageInfo {
 
     public void setFilepath(String filepath) {
         this.filepath = filepath;
+    }
+
+    public String getFileUri() {
+        return fileUri;
+    }
+
+    public void setFileUri(String fileUri) {
+        this.fileUri = fileUri;
     }
 
     public int getSendState() {

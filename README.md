@@ -17,7 +17,7 @@ https://github.com/Rance935/ChatUI
 ![image](https://github.com/moz1q1/ChatUI/blob/master/images/preview.png)
 
 
-<img src="https://github.com/moz1q1/ChatUI/blob/master/images/preview.png" width="200" height="200" alt="微信小程序"/><br/>
+<img src="https://github.com/moz1q1/ChatUI/blob/master/images/preview.png" width="1" height="1" alt="img"/><br/>
 
 
 ## 问题

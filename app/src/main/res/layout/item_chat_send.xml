@@ -32,7 +32,7 @@
             <com.rance.chatui.widget.BubbleImageView
                 android:id="@+id/chat_item_content_image"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:scaleType="centerCrop"
                 android:visibility="gone"
                 app:angle="6dp"
@@ -202,6 +202,7 @@
 
                 </RelativeLayout>
             </com.rance.chatui.widget.BubbleLinearLayout>
+
             <com.rance.chatui.widget.BubbleLinearLayout
                 android:id="@+id/chat_item_layout_link"
                 android:layout_width="wrap_content"

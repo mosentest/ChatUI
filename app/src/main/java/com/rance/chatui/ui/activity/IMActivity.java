@@ -207,6 +207,7 @@ public class IMActivity extends AppCompatActivity {
                     res = R.mipmap.icon_voice_right3;
                     break;
             }
+
             animView = imageView;
             animView.setImageResource(animationRes);
             animationDrawable = (AnimationDrawable) imageView.getDrawable();
@@ -247,7 +248,7 @@ public class IMActivity extends AppCompatActivity {
         @Override
         public void onLongClickImage(View view, int position) {
 
-            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(),messageInfos.get(position));
+            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), messageInfos.get(position));
 //            chatContextMenu.setAnimationStyle();
             chatContextMenu.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE,
                     RelativePopupWindow.HorizontalPosition.CENTER);
@@ -256,28 +257,28 @@ public class IMActivity extends AppCompatActivity {
 
         @Override
         public void onLongClickText(View view, int position) {
-            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(),messageInfos.get(position));
+            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), messageInfos.get(position));
             chatContextMenu.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE,
                     RelativePopupWindow.HorizontalPosition.CENTER);
         }
 
         @Override
         public void onLongClickItem(View view, int position) {
-            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(),messageInfos.get(position));
+            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), messageInfos.get(position));
             chatContextMenu.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE,
                     RelativePopupWindow.HorizontalPosition.CENTER);
         }
 
         @Override
         public void onLongClickFile(View view, int position) {
-            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(),messageInfos.get(position));
+            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), messageInfos.get(position));
             chatContextMenu.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE,
                     RelativePopupWindow.HorizontalPosition.CENTER);
         }
 
         @Override
         public void onLongClickLink(View view, int position) {
-            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(),messageInfos.get(position));
+            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), messageInfos.get(position));
             chatContextMenu.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE,
                     RelativePopupWindow.HorizontalPosition.CENTER);
         }
