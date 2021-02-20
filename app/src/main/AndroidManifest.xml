@@ -48,8 +48,8 @@
             android:windowSoftInputMode="stateHidden|adjustPan" />
 
         <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}"
+            android:name=".util.ChatFileProvider"
+            android:authorities="rance.chatui.ChatProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

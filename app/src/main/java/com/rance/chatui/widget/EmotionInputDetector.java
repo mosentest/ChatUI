@@ -1,12 +1,15 @@
 package com.rance.chatui.widget;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Build;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -20,6 +23,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
@@ -37,9 +46,9 @@ import org.greenrobot.eventbus.EventBus;
  * 邮箱：rance935@163.com
  * 输入框管理类
  */
-public class EmotionInputDetector {
+public class EmotionInputDetector implements LifecycleObserver {
     private static final String TAG = "EmotionInputDetector";
-    private static final String SHARE_PREFERENCE_NAME = "com.dss886.emotioninputdetector";
+    private static final String SHARE_PREFERENCE_NAME = "com.dss886.emotion.input.detector";
     private static final String SHARE_PREFERENCE_TAG = "soft_input_height";
 
     private Activity mActivity;
@@ -65,12 +74,19 @@ public class EmotionInputDetector {
     private ImageView mVoiceButton;
     private ImageView mEmotionButton;
 
+    /**
+     * 2021-2-20
+     */
+    private Lifecycle mLifecycle;
+
     private EmotionInputDetector() {
     }
 
-    public static EmotionInputDetector with(Activity activity) {
+    public static EmotionInputDetector with(AppCompatActivity activity) {
         EmotionInputDetector emotionInputDetector = new EmotionInputDetector();
         emotionInputDetector.mActivity = activity;
+        emotionInputDetector.mLifecycle = activity.getLifecycle();
+        emotionInputDetector.mLifecycle.addObserver(emotionInputDetector);
         emotionInputDetector.mInputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         emotionInputDetector.sp = activity.getSharedPreferences(SHARE_PREFERENCE_NAME, Context.MODE_PRIVATE);
         return emotionInputDetector;
@@ -247,10 +263,26 @@ public class EmotionInputDetector {
         mVoiceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //增加申请录音权限
+                if (ContextCompat.checkSelfPermission(mActivity, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(mActivity, new String[]{Manifest.permission.RECORD_AUDIO}, 0xa1);
+                    return;
+                }
                 if (isShowVoice) {
                     mVoiceButton.setImageResource(R.mipmap.icon_voice);
+                    if (!TextUtils.isEmpty(mEditText.getText().toString().trim())) {
+                        //处理下有文字，但是点击了语音的时候
+                        mAddButton.setVisibility(View.GONE);
+                        mSendButton.setVisibility(View.VISIBLE);
+                    } else {
+                        mAddButton.setVisibility(View.VISIBLE);
+                        mSendButton.setVisibility(View.GONE);
+                    }
                 } else {
                     mVoiceButton.setImageResource(R.mipmap.icon_keyboard);
+                    //处理下有文字，但是点击了语音的时候
+                    mAddButton.setVisibility(View.VISIBLE);
+                    mSendButton.setVisibility(View.GONE);
                 }
                 isShowVoice = !isShowVoice;
                 hideEmotionLayout(false);
@@ -476,4 +508,11 @@ public class EmotionInputDetector {
         }
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    public void destroy() {
+        mEditText = null;
+        mViewPager = null;
+        mLifecycle.removeObserver(this);
+        mLifecycle = null;
+    }
 }

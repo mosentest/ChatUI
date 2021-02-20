@@ -30,9 +30,10 @@ public class ChatContextMenu extends RelativePopupWindow {
 
     private MessageInfo mMessageInfo;
     private Context mContext;
+
     public ChatContextMenu(Context context, MessageInfo messageInfo) {
         this.mMessageInfo = messageInfo;
-        this.mContext = context;
+        this.mContext = context.getApplicationContext();
         View view = LayoutInflater.from(context).inflate(R.layout.popup_context_menu, null);
         setContentView(view);
 
@@ -54,12 +55,14 @@ public class ChatContextMenu extends RelativePopupWindow {
             @Override
             public void onClick(View v) {
                 copyToClipboard();
+                dismiss();
             }
         });
         tvTransit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 transitContent();
+                dismiss();
             }
         });
     }

@@ -1,10 +1,11 @@
 修改自开源项目：
 
-https://github.com/stridercheng/chatui
+[chatui](https://github.com/stridercheng/chatui)
 
-https://github.com/Rance935/ChatUI
+[ChatUI](https://github.com/Rance935/ChatUI)
 
-## 修改内容 2021-2-19
+## 修改内容
+（2021-2-19）
 + 适配10.0问题
 + 优化气泡问题rv复用存在问题，并重构下发送和回复的代码
 + 改为用studio3.5运行配置

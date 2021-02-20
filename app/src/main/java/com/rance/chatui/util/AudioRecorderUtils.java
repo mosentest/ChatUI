@@ -2,9 +2,12 @@ package com.rance.chatui.util;
 
 import android.content.Context;
 import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
+
+import com.rance.chatui.base.MyApplication;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,9 +33,11 @@ public class AudioRecorderUtils {
      * 文件存储默认sdcard/cadyd/record
      */
     public AudioRecorderUtils() {
-
         //默认保存路径为/sdcard/record/下
-        this(Environment.getExternalStorageDirectory() + "/cadyd/record/");
+        this(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q ?
+                MyApplication.getInstance().getExternalFilesDir(Constants.PATH_RECORD).getPath()
+                :
+                Environment.getExternalStorageDirectory() + Constants.PATH_RECORD);
     }
 
     public AudioRecorderUtils(String filePath) {

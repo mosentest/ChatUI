@@ -67,7 +67,6 @@
                     <com.rance.chatui.widget.GifTextView
                         android:id="@+id/chat_item_content_text"
                         style="@style/text_subhead_black"
-                        android:layout_marginStart="@dimen/content_horizontal_margin"
                         android:padding="@dimen/content_vertical_margin" />
 
                 </LinearLayout>

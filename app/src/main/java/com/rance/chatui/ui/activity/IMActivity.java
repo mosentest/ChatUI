@@ -133,7 +133,7 @@ public class IMActivity extends AppCompatActivity {
                 .build();
 
         GlobalOnItemClickManagerUtils globalOnItemClickListener = GlobalOnItemClickManagerUtils.getInstance(this);
-        globalOnItemClickListener.attachToEditText(editText);
+        globalOnItemClickListener.attachToEditText(getLifecycle(), editText);
 
         chatAdapter = new ChatAdapter(messageInfos);
         layoutManager = new LinearLayoutManager(this);
