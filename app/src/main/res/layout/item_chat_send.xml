@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -12,285 +13,312 @@
         android:layout_gravity="center_horizontal"
         android:visibility="gone" />
 
-    <RelativeLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivNone"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="centerCrop"
+            android:visibility="invisible" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end">
+
+            <com.rance.chatui.widget.sharpview.SharpRelativeLayout
+                android:id="@+id/chat_item_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:SharpView_arrowDirection="right"
+                app:SharpView_backgroundColor="@color/chat_send_bg"
+                app:SharpView_border="10dp"
+                app:SharpView_borderColor="#666666"
+                app:SharpView_radius="10dp"
+                app:SharpView_relativePosition="5%"
+                app:SharpView_sharpSize="10sp">
+
+                <com.rance.chatui.widget.sharpview.SharpImageView
+                    android:id="@+id/chat_item_content_image"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    app:SharpView_arrowDirection="right"
+                    app:SharpView_backgroundColor="@color/chat_accept_bg"
+                    app:SharpView_border="10dp"
+                    app:SharpView_borderColor="#666666"
+                    app:SharpView_radius="10dp"
+                    app:SharpView_relativePosition="5%"
+                    app:SharpView_sharpSize="10sp"
+                    tools:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/chat_item_layout_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <com.rance.chatui.widget.GifTextView
+                        android:id="@+id/chat_item_content_text"
+                        style="@style/text_subhead_black"
+                        android:layout_marginEnd="@dimen/content_horizontal_margin"
+                        android:padding="@dimen/content_vertical_margin"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/chat_item_layout_voice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center_vertical"
+                    android:minWidth="120dp"
+                    android:minHeight="48dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <com.rance.chatui.widget.GifTextView
+                        android:id="@+id/chat_item_content_video"
+                        style="@style/text_subhead_black"
+                        android:layout_marginRight="@dimen/content_horizontal_margin"
+                        android:padding="@dimen/content_vertical_margin"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/chat_item_voice"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/icon_voice_right3"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/chat_item_layout_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center_vertical"
+                    android:minWidth="120dp"
+                    android:minHeight="48dp"
+                    android:orientation="horizontal"
+                    tools:visibility="gone">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_item_file"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="30dp"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:id="@+id/iv_file_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/icon_file_excel" />
+
+                        <TextView
+                            android:id="@+id/tv_file_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_toRightOf="@+id/iv_file_type"
+                            android:textColor="@color/chat_send_text"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_file_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_file_name"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="26dp"
+                            android:layout_toRightOf="@+id/iv_file_type"
+                            android:textColor="@color/chat_send_text"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/chat_item_layout_contact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:minWidth="200dp"
+                    android:minHeight="98dp"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:visibility="gone"
+                    tools:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="通讯录联系人"
+                        android:textColor="@color/chat_send_text" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="14dp"
+                        android:background="@color/chat_send_text" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_contact_surname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/bg_surname"
+                            android:paddingLeft="14dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="14dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/chat_send_text"
+                            android:textSize="28sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/tv_contact_surname"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_contact_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/chat_send_text"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/tv_contact_phone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:textColor="@color/chat_send_text" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/chat_item_layout_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end|center_vertical"
+                    android:minWidth="240dp"
+                    android:minHeight="98dp"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    tools:visibility="gone">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_link_subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="200dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="14dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/chat_send_text"
+                            android:textSize="16sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_link_subject"
+                            android:layout_centerVertical="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_link_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="120dp"
+                                android:maxLines="3"
+                                android:textColor="@color/chat_send_text"
+                                android:textSize="12sp" />
+
+                            <ImageView
+                                android:id="@+id/iv_link_picture"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginStart="10dp"
+                                android:contentDescription="TODO"
+                                android:scaleType="centerCrop" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </com.rance.chatui.widget.sharpview.SharpRelativeLayout>
+
+            <TextView
+                android:id="@+id/chat_item_voice_time"
+                style="@style/text_body"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/content_vertical_margin"
+                android:layout_toStartOf="@+id/chat_item_layout"
+                tools:text="5s"
+                tools:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/chat_item_fail"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/content_vertical_margin"
+                android:layout_toStartOf="@+id/chat_item_voice_time"
+                android:focusable="false"
+                android:src="@drawable/msg_state_fail_resend"
+                tools:visibility="visible" />
+
+            <ProgressBar
+                android:id="@+id/chat_item_progress"
+                style="@android:style/Widget.ProgressBar.Small.Inverse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/content_vertical_margin"
+                android:layout_toStartOf="@+id/chat_item_voice_time"
+                tools:visibility="visible" />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/chat_item_header"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_alignParentRight="true"
             android:scaleType="centerCrop" />
+    </LinearLayout>
 
-        <RelativeLayout
-            android:id="@+id/chat_item_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/chat_item_header">
-
-            <com.rance.chatui.widget.BubbleImageView
-                android:id="@+id/chat_item_content_image"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:scaleType="centerCrop"
-                android:visibility="gone"
-                app:angle="6dp"
-                app:arrowHeight="8dp"
-                app:arrowLocation="right"
-                app:arrowPosition="15dp"
-                app:arrowWidth="10dp" />
-
-            <com.rance.chatui.widget.BubbleLinearLayout
-                android:id="@+id/chat_item_layout_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right|center_vertical"
-                android:minHeight="48dp"
-                android:minWidth="120dp"
-                android:visibility="gone"
-                android:orientation="horizontal"
-                app:angle="4dp"
-                app:arrowHeight="10dp"
-                app:arrowLocation="right"
-                app:arrowPosition="10dp"
-                app:arrowWidth="8dp"
-                app:bubbleColor="@color/chat_send_bg">
-
-                <com.rance.chatui.widget.GifTextView
-                    android:id="@+id/chat_item_content_text"
-                    style="@style/text_subhead_black"
-                    android:layout_marginRight="@dimen/content_horizontal_margin"
-                    android:padding="@dimen/content_vertical_margin"
-                    android:visibility="gone" />
-
-                <ImageView
-                    android:id="@+id/chat_item_voice"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/icon_voice_right3"
-                    android:visibility="gone" />
-            </com.rance.chatui.widget.BubbleLinearLayout>
-
-            <com.rance.chatui.widget.BubbleLinearLayout
-                android:id="@+id/chat_item_layout_file"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right|center_vertical"
-                android:minHeight="48dp"
-                android:minWidth="120dp"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                app:angle="4dp"
-                app:arrowHeight="10dp"
-                app:arrowLocation="right"
-                app:arrowPosition="10dp"
-                app:arrowWidth="8dp"
-                app:bubbleColor="@color/chat_send_bg">
-
-                <RelativeLayout
-                    android:id="@+id/rl_item_file"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="30dp"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:id="@+id/iv_file_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/icon_file_excel" />
-
-                    <TextView
-                        android:id="@+id/tv_file_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_toRightOf="@+id/iv_file_type"
-                        android:textColor="@color/chat_send_text"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tv_file_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_file_name"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="26dp"
-                        android:layout_toRightOf="@+id/iv_file_type"
-                        android:textColor="@color/chat_send_text"
-                        android:textSize="12sp" />
-                </RelativeLayout>
-            </com.rance.chatui.widget.BubbleLinearLayout>
-
-            <com.rance.chatui.widget.BubbleLinearLayout
-                android:id="@+id/chat_item_layout_contact"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left|center_vertical"
-                android:paddingTop="10dp"
-                android:minHeight="98dp"
-                android:minWidth="200dp"
-                android:visibility="gone"
-                android:orientation="vertical"
-                app:angle="4dp"
-                app:arrowHeight="10dp"
-                app:arrowLocation="right"
-                app:arrowPosition="20dp"
-                app:arrowWidth="8dp"
-                app:bubbleColor="@color/chat_send_bg">
-                <TextView
-                    android:id="@+id/tv_label"
-                    android:text="通讯录联系人"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/chat_send_text"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <View
-                    android:background="@color/chat_send_text"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginRight="14dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="1px" />
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tv_contact_surname"
-                        android:paddingLeft="14dp"
-                        android:paddingRight="14dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:textColor="@color/chat_send_text"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="8dp"
-                        android:textSize="28sp"
-                        android:background="@drawable/bg_surname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_toRightOf="@+id/tv_contact_surname"
-                        android:layout_marginLeft="10dp"
-                        android:layout_centerVertical="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/tv_contact_name"
-                            android:textColor="@color/chat_send_text"
-                            android:textSize="18sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:id="@+id/tv_contact_phone"
-                            android:textColor="@color/chat_send_text"
-                            android:layout_marginTop="8dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-
-                </RelativeLayout>
-            </com.rance.chatui.widget.BubbleLinearLayout>
-
-            <com.rance.chatui.widget.BubbleLinearLayout
-                android:id="@+id/chat_item_layout_link"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right|center_vertical"
-                android:paddingTop="10dp"
-                android:minHeight="98dp"
-                android:minWidth="240dp"
-                android:visibility="gone"
-                android:orientation="vertical"
-                app:angle="4dp"
-                app:arrowHeight="10dp"
-                app:arrowLocation="right"
-                app:arrowPosition="20dp"
-                app:arrowWidth="8dp"
-                app:bubbleColor="@color/chat_send_bg">
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp">
-                    <TextView
-                        android:id="@+id/tv_link_subject"
-                        android:paddingRight="14dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:maxWidth="200dp"
-                        android:textColor="@color/chat_send_text"
-                        android:textSize="16sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_below="@+id/tv_link_subject"
-                        android:layout_centerVertical="true"
-                        android:gravity="center_vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/tv_link_text"
-                            android:textColor="@color/chat_send_text"
-                            android:maxLines="3"
-                            android:textSize="12sp"
-                            android:maxWidth="120dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <ImageView
-                            android:id="@+id/iv_link_picture"
-                            android:layout_marginLeft="10dp"
-                            android:scaleType="centerCrop"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp" />
-                    </LinearLayout>
-
-                </RelativeLayout>
-            </com.rance.chatui.widget.BubbleLinearLayout>
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/chat_item_voice_time"
-            style="@style/text_body"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/content_vertical_margin"
-            android:layout_toLeftOf="@+id/chat_item_layout"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/chat_item_fail"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/content_vertical_margin"
-            android:layout_toLeftOf="@+id/chat_item_voice_time"
-            android:focusable="false"
-            android:src="@drawable/msg_state_fail_resend"
-            android:visibility="gone" />
-
-        <ProgressBar
-            android:id="@+id/chat_item_progress"
-            style="@android:style/Widget.ProgressBar.Small.Inverse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/content_vertical_margin"
-            android:layout_toLeftOf="@+id/chat_item_voice_time"
-            android:visibility="gone" />
-    </RelativeLayout>
 
 </LinearLayout>

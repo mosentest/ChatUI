@@ -307,7 +307,7 @@ public class IMActivity extends AppCompatActivity {
         messageInfos.add(messageInfo1);
 
         MessageInfo messageInfo2 = new MessageInfo();
-        messageInfo2.setFilepath("http://img4.imgtn.bdimg.com/it/u=1800788429,176707229&fm=21&gp=0.jpg");
+        messageInfo2.setFilepath("https://t7.baidu.com/it/u=3832474391,1084278450&fm=193&f=GIF");
         messageInfo2.setFileType(Constants.CHAT_FILE_TYPE_IMAGE);
         messageInfo2.setType(Constants.CHAT_ITEM_TYPE_LEFT);
         messageInfo2.setHeader("http://img0.imgtn.bdimg.com/it/u=401967138,750679164&fm=26&gp=0.jpg");
@@ -320,6 +320,15 @@ public class IMActivity extends AppCompatActivity {
         messageInfo3.setSendState(Constants.CHAT_ITEM_SEND_ERROR);
         messageInfo3.setHeader("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcdn-media.extratv.com%2F2012%2F11%2F28%2Fadrienne-maloof-480x360.jpg&refer=http%3A%2F%2Fcdn-media.extratv.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1616220671&t=096ed6a55855fd7bbb897915141295de");
         messageInfos.add(messageInfo3);
+
+
+        MessageInfo messageInfo4 = new MessageInfo();
+        messageInfo4.setContent("[微笑[微笑][色][色][色][微笑][色][色][色][微笑][色][色][色][微笑][色][色][色][微笑][色][色][色][微笑][色][色][色][微笑][色][色][色]][色][色][色]");
+        messageInfo4.setFileType(Constants.CHAT_FILE_TYPE_TEXT);
+        messageInfo4.setType(Constants.CHAT_ITEM_TYPE_RIGHT);
+        messageInfo4.setSendState(Constants.CHAT_ITEM_SEND_ERROR);
+        messageInfo4.setHeader("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcdn-media.extratv.com%2F2012%2F11%2F28%2Fadrienne-maloof-480x360.jpg&refer=http%3A%2F%2Fcdn-media.extratv.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1616220671&t=096ed6a55855fd7bbb897915141295de");
+        messageInfos.add(messageInfo4);
 
         chatAdapter.addAll(messageInfos);
     }

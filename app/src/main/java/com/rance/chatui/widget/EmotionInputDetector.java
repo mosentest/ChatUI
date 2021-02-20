@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.rance.chatui.R;
@@ -57,6 +58,12 @@ public class EmotionInputDetector {
     private AudioRecorderUtils mAudioRecorderUtils;
     private PopupWindowFactory mVoicePop;
     private TextView mPopVoiceText;
+    /**
+     * 2021-2-19
+     * 增加按钮
+     */
+    private ImageView mVoiceButton;
+    private ImageView mEmotionButton;
 
     private EmotionInputDetector() {
     }
@@ -80,6 +87,9 @@ public class EmotionInputDetector {
         mEditText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+
+                scrollBottom();
+
                 if (event.getAction() == MotionEvent.ACTION_UP && mEmotionLayout.isShown()) {
                     lockContentHeight();
                     hideEmotionLayout(true);
@@ -121,10 +131,33 @@ public class EmotionInputDetector {
         return this;
     }
 
-    public EmotionInputDetector bindToEmotionButton(View emotionButton) {
+    private void scrollBottom() {
+        if (mContentView instanceof RecyclerView) {
+            ((RecyclerView) mContentView).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    RecyclerView.Adapter adapter = ((RecyclerView) mContentView).getAdapter();
+                    if (adapter != null) {
+                        ((RecyclerView) mContentView).scrollToPosition(adapter.getItemCount() - 1);
+                    }
+                }
+            }, 100L);
+        }
+    }
+
+    public EmotionInputDetector bindToEmotionButton(ImageView emotionButton) {
+        mEmotionButton = emotionButton;
         emotionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                isShowVoice = false;
+                mVoiceButton.setImageResource(R.mipmap.icon_voice);
+                mVoiceText.setVisibility(View.GONE);
+                mEditText.setVisibility(View.VISIBLE);
+
+                scrollBottom();
+
                 if (mEmotionLayout.isShown()) {
                     if (isShowAdd) {
                         mViewPager.setCurrentItem(0);
@@ -157,6 +190,14 @@ public class EmotionInputDetector {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                isShowVoice = false;
+                mVoiceButton.setImageResource(R.mipmap.icon_voice);
+                mVoiceText.setVisibility(View.GONE);
+                mEditText.setVisibility(View.VISIBLE);
+
+                scrollBottom();
+
                 if (mEmotionLayout.isShown()) {
                     if (isShowEmotion) {
                         mViewPager.setCurrentItem(1);
@@ -202,13 +243,14 @@ public class EmotionInputDetector {
     }
 
     public EmotionInputDetector bindToVoiceButton(final ImageView voiceButton) {
-        voiceButton.setOnClickListener(new View.OnClickListener() {
+        mVoiceButton = voiceButton;
+        mVoiceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isShowVoice) {
-                    voiceButton.setImageResource(R.mipmap.icon_voice);
+                    mVoiceButton.setImageResource(R.mipmap.icon_voice);
                 } else {
-                    voiceButton.setImageResource(R.mipmap.icon_keyboard);
+                    mVoiceButton.setImageResource(R.mipmap.icon_keyboard);
                 }
                 isShowVoice = !isShowVoice;
                 hideEmotionLayout(false);
@@ -344,12 +386,14 @@ public class EmotionInputDetector {
     }
 
     private void showEmotionLayout() {
+        //增加切换按钮的图标
+        mEmotionButton.setImageResource(R.mipmap.icon_keyboard);
         int softInputHeight = getSupportSoftInputHeight();
         if (softInputHeight == 0) {
             softInputHeight = sp.getInt(SHARE_PREFERENCE_TAG, 768);
         }
         hideSoftInput();
-        Log.e(TAG, "showEmotionLayout: ->" + softInputHeight );
+        Log.e(TAG, "showEmotionLayout: ->" + softInputHeight);
         mEmotionLayout.getLayoutParams().height = softInputHeight;
         mEmotionLayout.setVisibility(View.VISIBLE);
     }
@@ -357,6 +401,8 @@ public class EmotionInputDetector {
     public void hideEmotionLayout(boolean showSoftInput) {
         if (mEmotionLayout.isShown()) {
             mEmotionLayout.setVisibility(View.GONE);
+            //改为笑的表情
+            mEmotionButton.setImageResource(R.mipmap.icon_face);
             if (showSoftInput) {
                 showSoftInput();
             }
@@ -410,7 +456,7 @@ public class EmotionInputDetector {
             Log.w("EmotionInputDetector", "Warning: value of softInputHeight is below zero!");
         }
         if (softInputHeight > 0) {
-            Log.e(TAG, "getSupportSoftInputHeight: ->" + softInputHeight );
+            Log.e(TAG, "getSupportSoftInputHeight: ->" + softInputHeight);
             sp.edit().putInt(SHARE_PREFERENCE_TAG, softInputHeight).apply();
         }
         return softInputHeight;

@@ -20,7 +20,7 @@ import java.util.List;
  * 作者：Rance on 2016/11/29 10:46
  * 邮箱：rance935@163.com
  */
-public class ChatAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class ChatAdapter extends RecyclerView.Adapter<BaseViewHolder<MessageInfo>> {
 
     private onItemClickListener onItemClickListener;
     public Handler handler;
@@ -55,7 +55,7 @@ public class ChatAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder<MessageInfo> onCreateViewHolder(ViewGroup parent, int viewType) {
         BaseViewHolder viewHolder = null;
         switch (viewType) {
             case Constants.CHAT_ITEM_TYPE_LEFT:
@@ -69,7 +69,7 @@ public class ChatAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(BaseViewHolder holder, int position) {
+    public void onBindViewHolder(BaseViewHolder<MessageInfo> holder, int position) {
         holder.itemView.setTag(position);
         holder.setData(messageInfoList.get(position));
     }

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="SharpView_radius" format="dimension" />
+    <attr name="SharpView_backgroundColor" format="color" />
+    <attr name="SharpView_startBgColor" format="color" />
+    <attr name="SharpView_middleBgColor" format="color" />
+    <attr name="SharpView_endBgColor" format="color" />
+    <attr name="SharpView_arrowDirection">
+        <enum name="left" value="1" />
+        <enum name="top" value="2" />
+        <enum name="right" value="3" />
+        <enum name="bottom" value="4" />
+    </attr>
+    <attr name="SharpView_relativePosition" format="fraction" />
+    <attr name="SharpView_sharpSize" format="dimension" />
+    <attr name="SharpView_border" format="dimension" />
+    <attr name="SharpView_borderColor" format="color" />
+    <attr name="SharpView_left_top_radius" format="dimension" />
+    <attr name="SharpView_right_top_radius" format="dimension" />
+    <attr name="SharpView_right_bottom_radius" format="dimension" />
+    <attr name="SharpView_left_bottom_radius" format="dimension" />
+
+    <declare-styleable name="SharpRelativeLayout">
+        <attr name="SharpView_radius" />
+        <attr name="SharpView_backgroundColor" />
+        <attr name="SharpView_startBgColor" />
+        <attr name="SharpView_middleBgColor" />
+        <attr name="SharpView_endBgColor" />
+        <attr name="SharpView_arrowDirection" />
+        <attr name="SharpView_relativePosition" />
+        <attr name="SharpView_sharpSize" />
+        <attr name="SharpView_border" />
+        <attr name="SharpView_borderColor" />
+        <attr name="SharpView_left_top_radius" />
+        <attr name="SharpView_right_top_radius" />
+        <attr name="SharpView_right_bottom_radius" />
+        <attr name="SharpView_left_bottom_radius" />
+    </declare-styleable>
+
+    <declare-styleable name="SharpLinearLayout">
+        <attr name="SharpView_radius" />
+        <attr name="SharpView_backgroundColor" />
+        <attr name="SharpView_startBgColor" />
+        <attr name="SharpView_middleBgColor" />
+        <attr name="SharpView_endBgColor" />
+        <attr name="SharpView_arrowDirection" />
+        <attr name="SharpView_relativePosition" />
+        <attr name="SharpView_sharpSize" />
+        <attr name="SharpView_border" />
+        <attr name="SharpView_borderColor" />
+        <attr name="SharpView_left_top_radius" />
+        <attr name="SharpView_right_top_radius" />
+        <attr name="SharpView_right_bottom_radius" />
+        <attr name="SharpView_left_bottom_radius" />
+    </declare-styleable>
+
+    <declare-styleable name="SharpTextView">
+        <attr name="SharpView_radius" />
+        <attr name="SharpView_backgroundColor" />
+        <attr name="SharpView_startBgColor" />
+        <attr name="SharpView_middleBgColor" />
+        <attr name="SharpView_endBgColor" />
+        <attr name="SharpView_arrowDirection" />
+        <attr name="SharpView_relativePosition" />
+        <attr name="SharpView_sharpSize" />
+        <attr name="SharpView_border" />
+        <attr name="SharpView_borderColor" />
+        <attr name="SharpView_left_top_radius" />
+        <attr name="SharpView_right_top_radius" />
+        <attr name="SharpView_right_bottom_radius" />
+        <attr name="SharpView_left_bottom_radius" />
+    </declare-styleable>
+
+    <declare-styleable name="SharpImageView">
+        <attr name="SharpView_radius" />
+        <attr name="SharpView_arrowDirection" />
+        <attr name="SharpView_relativePosition" />
+        <attr name="SharpView_sharpSize" />
+        <attr name="SharpView_left_top_radius" />
+        <attr name="SharpView_right_top_radius" />
+        <attr name="SharpView_right_bottom_radius" />
+        <attr name="SharpView_left_bottom_radius" />
+    </declare-styleable>
+
+    <declare-styleable name="SharpEditText">
+        <attr name="SharpView_radius" />
+        <attr name="SharpView_backgroundColor" />
+        <attr name="SharpView_startBgColor" />
+        <attr name="SharpView_middleBgColor" />
+        <attr name="SharpView_endBgColor" />
+        <attr name="SharpView_arrowDirection" />
+        <attr name="SharpView_relativePosition" />
+        <attr name="SharpView_sharpSize" />
+        <attr name="SharpView_border" />
+        <attr name="SharpView_borderColor" />
+        <attr name="SharpView_left_top_radius" />
+        <attr name="SharpView_right_top_radius" />
+        <attr name="SharpView_right_bottom_radius" />
+        <attr name="SharpView_left_bottom_radius" />
+    </declare-styleable>
+
+</resources>
