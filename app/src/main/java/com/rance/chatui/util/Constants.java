@@ -27,6 +27,7 @@ public class Constants {
      **/
     public static final int CHAT_ITEM_TYPE_LEFT = 0x001;
     public static final int CHAT_ITEM_TYPE_RIGHT = 0x002;
+    public static final int CHAT_ITEM_REFRESH = 0x003;
     /**
      * 0x003-发送中  0x004-发送失败  0x005-发送成功
      **/

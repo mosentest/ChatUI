@@ -25,6 +25,7 @@ import com.labo.kaji.relativepopupwindow.RelativePopupWindow;
 import com.rance.chatui.R;
 import com.rance.chatui.adapter.ChatAdapter;
 import com.rance.chatui.adapter.CommonFragmentPagerAdapter;
+import com.rance.chatui.adapter.OnRefreshListener;
 import com.rance.chatui.enity.FullImageInfo;
 import com.rance.chatui.enity.Link;
 import com.rance.chatui.enity.MessageInfo;
@@ -161,12 +162,39 @@ public class IMActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+
             }
         });
+        chatAdapter.setRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                chatList.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MessageInfo messageInfo2 = new MessageInfo();
+                        messageInfo2.setContent("current:" + current);
+                        messageInfo2.setFileType(Constants.CHAT_FILE_TYPE_TEXT);
+                        messageInfo2.setType(Constants.CHAT_ITEM_TYPE_LEFT);
+                        messageInfo2.setHeader("http://img0.imgtn.bdimg.com/it/u=401967138,750679164&fm=26&gp=0.jpg");
+                        messageInfos.add(0, messageInfo2);
+                        if (current > total) {
+                            chatAdapter.setLoadState(ChatAdapter.LOADING_END);
+                        } else {
+                            chatAdapter.setLoadState(ChatAdapter.LOADING_COMPLETE);
+                        }
+                        current++;
+                    }
+                }, 1000);
+            }
+        });
+        chatAdapter.setRecyclerView(chatList);
         chatAdapter.addItemClickListener(itemClickListener);
         LoadData();
     }
 
+    private int current = 0;
+
+    private int total = 5;
     /**
      * item点击事件
      */
@@ -323,7 +351,7 @@ public class IMActivity extends AppCompatActivity {
 
 
         MessageInfo messageInfo4 = new MessageInfo();
-        messageInfo4.setContent("[微笑[微笑][色][色][色][微笑][色][色][色][微笑][色][色][色][微笑][色][色][色][微笑][色][色][色][微笑][色][色][色][微笑][色][色][色]][色][色][色]");
+        messageInfo4.setContent("[色][色]][色][色][色][微笑][微笑][色]");
         messageInfo4.setFileType(Constants.CHAT_FILE_TYPE_TEXT);
         messageInfo4.setType(Constants.CHAT_ITEM_TYPE_RIGHT);
         messageInfo4.setSendState(Constants.CHAT_ITEM_SEND_ERROR);
@@ -339,7 +367,7 @@ public class IMActivity extends AppCompatActivity {
         messageInfo.setType(Constants.CHAT_ITEM_TYPE_RIGHT);
         messageInfo.setSendState(Constants.CHAT_ITEM_SENDING);
         messageInfos.add(messageInfo);
-        chatAdapter.notifyItemInserted(messageInfos.size() - 1);
+        chatAdapter.notifyItemInserted(chatAdapter.getItemCount() - 1);
 //        chatAdapter.add(messageInfo);
         chatList.scrollToPosition(chatAdapter.getItemCount() - 1);
         new Handler().postDelayed(new Runnable() {
@@ -356,7 +384,7 @@ public class IMActivity extends AppCompatActivity {
                 message.setFileType(Constants.CHAT_FILE_TYPE_TEXT);
                 message.setHeader("http://img0.imgtn.bdimg.com/it/u=401967138,750679164&fm=26&gp=0.jpg");
                 messageInfos.add(message);
-                chatAdapter.notifyItemInserted(messageInfos.size() - 1);
+                chatAdapter.notifyItemInserted(chatAdapter.getItemCount() - 1);
                 chatList.scrollToPosition(chatAdapter.getItemCount() - 1);
             }
         }, 3000);
