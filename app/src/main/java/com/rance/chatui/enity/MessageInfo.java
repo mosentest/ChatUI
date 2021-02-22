@@ -1,10 +1,12 @@
 package com.rance.chatui.enity;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 /**
  * 作者：Rance on 2016/12/14 14:13
  * 邮箱：rance935@163.com
  */
-public class MessageInfo {
+public class MessageInfo implements MultiItemEntity {
     private int type;
     private String content;
     private String filepath;
@@ -129,5 +131,10 @@ public class MessageInfo {
                 ", fileType='" + fileType + '\'' +
                 ", object=" + object +
                 '}';
+    }
+
+    @Override
+    public int getItemType() {
+        return type;
     }
 }
