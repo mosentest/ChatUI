@@ -26,6 +26,8 @@ import com.rance.chatui.R;
 import com.rance.chatui.adapter.ChatAdapter;
 import com.rance.chatui.adapter.CommonFragmentPagerAdapter;
 import com.rance.chatui.adapter.OnRefreshListener;
+import com.rance.chatui.base.ImApplication;
+import com.rance.chatui.dao.MessageInfoDao;
 import com.rance.chatui.enity.FullImageInfo;
 import com.rance.chatui.enity.Link;
 import com.rance.chatui.enity.MessageInfo;
@@ -73,7 +75,7 @@ public class IMActivity extends AppCompatActivity {
 
     private ChatAdapter chatAdapter;
     private LinearLayoutManager layoutManager;
-    private List<MessageInfo> messageInfos;
+
     //录音相关
     int animationRes = 0;
     int res = 0;
@@ -136,7 +138,7 @@ public class IMActivity extends AppCompatActivity {
         GlobalOnItemClickManagerUtils globalOnItemClickListener = GlobalOnItemClickManagerUtils.getInstance(this);
         globalOnItemClickListener.attachToEditText(getLifecycle(), editText);
 
-        chatAdapter = new ChatAdapter(messageInfos);
+        chatAdapter = new ChatAdapter(null);
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         chatList.setLayoutManager(layoutManager);
@@ -176,7 +178,20 @@ public class IMActivity extends AppCompatActivity {
                         messageInfo2.setFileType(Constants.CHAT_FILE_TYPE_TEXT);
                         messageInfo2.setType(Constants.CHAT_ITEM_TYPE_LEFT);
                         messageInfo2.setHeader("http://img0.imgtn.bdimg.com/it/u=401967138,750679164&fm=26&gp=0.jpg");
-                        messageInfos.add(0, messageInfo2);
+
+                        ImApplication.getInstance().getDaoSession().getMessageInfoDao().insert(messageInfo2);
+
+                        List<MessageInfo> list = ImApplication
+                                .getInstance()
+                                .getDaoSession()
+                                .getMessageInfoDao()
+                                .queryBuilder()
+                                .orderAsc(MessageInfoDao.Properties.Id)
+                                .build()
+                                .list();
+
+                        chatAdapter.setNewData(list);
+
                         if (current > total) {
                             chatAdapter.setLoadState(ChatAdapter.LOADING_END);
                         } else {
@@ -213,7 +228,7 @@ public class IMActivity extends AppCompatActivity {
             fullImageInfo.setLocationY(location[1]);
             fullImageInfo.setWidth(view.getWidth());
             fullImageInfo.setHeight(view.getHeight());
-            fullImageInfo.setImageUrl(messageInfos.get(position).getFilepath());
+            fullImageInfo.setImageUrl(chatAdapter.getMessageInfoList().get(position).getFilepath());
             EventBus.getDefault().postSticky(fullImageInfo);
             startActivity(new Intent(IMActivity.this, FullImageActivity.class));
             overridePendingTransition(0, 0);
@@ -225,7 +240,7 @@ public class IMActivity extends AppCompatActivity {
                 animView.setImageResource(res);
                 animView = null;
             }
-            switch (messageInfos.get(position).getType()) {
+            switch (chatAdapter.getMessageInfoList().get(position).getType()) {
                 case 1:
                     animationRes = R.drawable.voice_left;
                     res = R.mipmap.icon_voice_left3;
@@ -240,7 +255,7 @@ public class IMActivity extends AppCompatActivity {
             animView.setImageResource(animationRes);
             animationDrawable = (AnimationDrawable) imageView.getDrawable();
             animationDrawable.start();
-            MediaManager.playSound(messageInfos.get(position).getFilepath(), new MediaPlayer.OnCompletionListener() {
+            MediaManager.playSound(chatAdapter.getMessageInfoList().get(position).getFilepath(), new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
                     animView.setImageResource(res);
@@ -251,7 +266,7 @@ public class IMActivity extends AppCompatActivity {
         @Override
         public void onFileClick(View view, int position) {
 
-            MessageInfo messageInfo = messageInfos.get(position);
+            MessageInfo messageInfo = chatAdapter.getMessageInfoList().get(position);
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.addCategory(Intent.CATEGORY_DEFAULT);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -266,7 +281,7 @@ public class IMActivity extends AppCompatActivity {
 
         @Override
         public void onLinkClick(View view, int position) {
-            MessageInfo messageInfo = messageInfos.get(position);
+            MessageInfo messageInfo = chatAdapter.getMessageInfoList().get(position);
             Link link = (Link) messageInfo.getObject();
             Uri uri = Uri.parse(link.getUrl());
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -276,7 +291,7 @@ public class IMActivity extends AppCompatActivity {
         @Override
         public void onLongClickImage(View view, int position) {
 
-            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), messageInfos.get(position));
+            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), chatAdapter.getMessageInfoList().get(position));
 //            chatContextMenu.setAnimationStyle();
             chatContextMenu.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE,
                     RelativePopupWindow.HorizontalPosition.CENTER);
@@ -285,28 +300,28 @@ public class IMActivity extends AppCompatActivity {
 
         @Override
         public void onLongClickText(View view, int position) {
-            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), messageInfos.get(position));
+            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), chatAdapter.getMessageInfoList().get(position));
             chatContextMenu.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE,
                     RelativePopupWindow.HorizontalPosition.CENTER);
         }
 
         @Override
         public void onLongClickItem(View view, int position) {
-            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), messageInfos.get(position));
+            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), chatAdapter.getMessageInfoList().get(position));
             chatContextMenu.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE,
                     RelativePopupWindow.HorizontalPosition.CENTER);
         }
 
         @Override
         public void onLongClickFile(View view, int position) {
-            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), messageInfos.get(position));
+            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), chatAdapter.getMessageInfoList().get(position));
             chatContextMenu.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE,
                     RelativePopupWindow.HorizontalPosition.CENTER);
         }
 
         @Override
         public void onLongClickLink(View view, int position) {
-            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), messageInfos.get(position));
+            ChatContextMenu chatContextMenu = new ChatContextMenu(view.getContext(), chatAdapter.getMessageInfoList().get(position));
             chatContextMenu.showOnAnchor(view, RelativePopupWindow.VerticalPosition.ABOVE,
                     RelativePopupWindow.HorizontalPosition.CENTER);
         }
@@ -316,10 +331,10 @@ public class IMActivity extends AppCompatActivity {
      * 构造聊天数据
      */
     private void LoadData() {
-        messageInfos = new ArrayList<>();
+        List<MessageInfo> messageInfos = new ArrayList<>();
 
         MessageInfo messageInfo = new MessageInfo();
-        messageInfo.setContent("你好，欢迎使用Rance的聊天界面框架");
+        messageInfo.setContent("你好，欢迎使用");
         messageInfo.setFileType(Constants.CHAT_FILE_TYPE_TEXT);
         messageInfo.setType(Constants.CHAT_ITEM_TYPE_LEFT);
         messageInfo.setHeader("http://img0.imgtn.bdimg.com/it/u=401967138,750679164&fm=26&gp=0.jpg");
@@ -358,7 +373,18 @@ public class IMActivity extends AppCompatActivity {
         messageInfo4.setHeader("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcdn-media.extratv.com%2F2012%2F11%2F28%2Fadrienne-maloof-480x360.jpg&refer=http%3A%2F%2Fcdn-media.extratv.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1616220671&t=096ed6a55855fd7bbb897915141295de");
         messageInfos.add(messageInfo4);
 
-        chatAdapter.addAll(messageInfos);
+        ImApplication.getInstance().getDaoSession().getMessageInfoDao().insertOrReplaceInTx(messageInfos);
+
+        List<MessageInfo> list = ImApplication
+                .getInstance()
+                .getDaoSession()
+                .getMessageInfoDao()
+                .queryBuilder()
+                .orderAsc(MessageInfoDao.Properties.Id)
+                .build()
+                .list();
+
+        chatAdapter.setNewData(list);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -366,9 +392,7 @@ public class IMActivity extends AppCompatActivity {
         messageInfo.setHeader("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcdn-media.extratv.com%2F2012%2F11%2F28%2Fadrienne-maloof-480x360.jpg&refer=http%3A%2F%2Fcdn-media.extratv.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1616220671&t=096ed6a55855fd7bbb897915141295de");
         messageInfo.setType(Constants.CHAT_ITEM_TYPE_RIGHT);
         messageInfo.setSendState(Constants.CHAT_ITEM_SENDING);
-        messageInfos.add(messageInfo);
-        chatAdapter.notifyItemInserted(chatAdapter.getItemCount() - 1);
-//        chatAdapter.add(messageInfo);
+        chatAdapter.add(messageInfo);
         chatList.scrollToPosition(chatAdapter.getItemCount() - 1);
         new Handler().postDelayed(new Runnable() {
             public void run() {
@@ -383,8 +407,7 @@ public class IMActivity extends AppCompatActivity {
                 message.setType(Constants.CHAT_ITEM_TYPE_LEFT);
                 message.setFileType(Constants.CHAT_FILE_TYPE_TEXT);
                 message.setHeader("http://img0.imgtn.bdimg.com/it/u=401967138,750679164&fm=26&gp=0.jpg");
-                messageInfos.add(message);
-                chatAdapter.notifyItemInserted(chatAdapter.getItemCount() - 1);
+                chatAdapter.add(message);
                 chatList.scrollToPosition(chatAdapter.getItemCount() - 1);
             }
         }, 3000);

@@ -1,11 +1,20 @@
 package com.rance.chatui.enity;
 
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Transient;
+import org.greenrobot.greendao.annotation.Unique;
+import org.greenrobot.greendao.annotation.Generated;
+
 /**
  * 作者：Rance on 2016/12/14 14:13
  * 邮箱：rance935@163.com
  */
+@Entity
 public class MessageInfo  {
+    @Id(autoincrement = true)
+    private Long id;
     private int type;
     private String content;
     private String filepath;
@@ -16,14 +25,37 @@ public class MessageInfo  {
     private long voiceTime;
     private String msgId;
     private String fileType;
+    @Transient
     private Object object;
     private String mimeType;
+
+    @Generated(hash = 1272845438)
+    public MessageInfo(Long id, int type, String content, String filepath,
+            String fileUri, int sendState, String time, String header,
+            long voiceTime, String msgId, String fileType, String mimeType) {
+        this.id = id;
+        this.type = type;
+        this.content = content;
+        this.filepath = filepath;
+        this.fileUri = fileUri;
+        this.sendState = sendState;
+        this.time = time;
+        this.header = header;
+        this.voiceTime = voiceTime;
+        this.msgId = msgId;
+        this.fileType = fileType;
+        this.mimeType = mimeType;
+    }
+
+    @Generated(hash = 1292770546)
+    public MessageInfo() {
+    }
 
     public Object getObject() {
         return object;
     }
 
-    public void setObject(Object object) {
+    public void setObject(Object object)     {
         this.object = object;
     }
 
@@ -130,5 +162,13 @@ public class MessageInfo  {
                 ", fileType='" + fileType + '\'' +
                 ", object=" + object +
                 '}';
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -12,7 +12,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
@@ -21,11 +20,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rance.chatui.R;
 import com.rance.chatui.base.BaseFragment;
-import com.rance.chatui.base.MyApplication;
+import com.rance.chatui.base.ImApplication;
 import com.rance.chatui.enity.MessageInfo;
 import com.rance.chatui.ui.activity.ContactActivity;
 import com.rance.chatui.util.Constants;
@@ -164,7 +162,7 @@ public class ChatFunctionFragment extends BaseFragment {
     private void takePhoto() {
         String fileName = System.currentTimeMillis() + ".png";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            fileUri = new File(MyApplication.getInstance().getExternalFilesDir(Constants.PATH_PHOTO).getPath() + File.separator + fileName);
+            fileUri = new File(ImApplication.getInstance().getExternalFilesDir(Constants.PATH_PHOTO).getPath() + File.separator + fileName);
         } else {
             fileUri = new File(Environment.getExternalStorageDirectory().getPath() + Constants.PATH_PHOTO + File.separator + fileName);
         }

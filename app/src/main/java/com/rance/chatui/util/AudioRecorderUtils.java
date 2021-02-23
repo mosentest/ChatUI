@@ -7,7 +7,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 
-import com.rance.chatui.base.MyApplication;
+import com.rance.chatui.base.ImApplication;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +35,7 @@ public class AudioRecorderUtils {
     public AudioRecorderUtils() {
         //默认保存路径为/sdcard/record/下
         this(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q ?
-                MyApplication.getInstance().getExternalFilesDir(Constants.PATH_RECORD).getPath()
+                ImApplication.getInstance().getExternalFilesDir(Constants.PATH_RECORD).getPath()
                 :
                 Environment.getExternalStorageDirectory() + Constants.PATH_RECORD);
     }

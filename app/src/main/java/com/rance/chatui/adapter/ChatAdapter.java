@@ -166,14 +166,26 @@ public class ChatAdapter extends RecyclerView.Adapter<BaseViewHolder<MessageInfo
         notifyDataSetChanged();
     }
 
+    public void setNewData(List<MessageInfo> messageInfos) {
+        if (messageInfoList == null) {
+            messageInfoList = messageInfos;
+        } else {
+            messageInfoList.clear();
+            messageInfoList.addAll(messageInfos);
+        }
+        notifyDataSetChanged();
+    }
+
     public void add(MessageInfo messageInfo) {
         if (messageInfoList == null) {
             messageInfoList = new ArrayList<>();
         }
-
         messageInfoList.add(messageInfo);
-
         notifyDataSetChanged();
+    }
+
+    public List<MessageInfo> getMessageInfoList() {
+        return messageInfoList;
     }
 
     public interface onItemClickListener {
